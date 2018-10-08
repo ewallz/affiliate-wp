@@ -894,10 +894,6 @@ class Affiliate_WP_WooCommerce extends Affiliate_WP_Base {
 
 		$type = get_post_meta( $product_id, '_affwp_' . $this->context . '_product_rate_type', true );
 
-		if ( is_numeric( $rate ) && ! $type ) {
-			$type = affwp_get_affiliate_rate_type( $affiliate_id );
-		}
-
 		if ( $type ) {
 
 			$decimals = affwp_get_decimal_count();
