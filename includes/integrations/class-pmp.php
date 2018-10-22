@@ -108,6 +108,12 @@ class Affiliate_WP_PMP extends Affiliate_WP_Base {
 				$this->mark_referral_complete( $order );
 
 			}
+			
+			if ( 0 == $order->subtotal ) {
+
+				$this->complete_referral( $order->id );
+
+			}
 		}
 
 	}
@@ -133,7 +139,11 @@ class Affiliate_WP_PMP extends Affiliate_WP_Base {
 		$product_id = 0;
 
 		/** This filter is documented in includes/integrations/class-base.php */
-		return apply_filters( 'affwp_get_product_rate', $rate, $product_id, $args, $affiliate_id, $this->context );
+		$rate = apply_filters( 'affwp_get_product_rate', $rate, $product_id, $args, $affiliate_id, $this->context );
+
+		$rate = affwp_sanitize_referral_rate( $rate );
+
+		return $rate;
 	}
 
 	public function mark_referral_complete( $order ) {

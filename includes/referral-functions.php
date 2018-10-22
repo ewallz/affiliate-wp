@@ -419,3 +419,16 @@ function affwp_is_url_banned( $url ) {
 	 */
 	return apply_filters( 'affwp_is_url_banned', $banned, $url );
 }
+
+/**
+ * Sanitize the given referral rate.
+ *
+ * @since 2.2.11
+ *
+ * @param string $rate The referral rate to sanitize.
+ *
+ * @return string The sanitized referral rate.
+ */
+function affwp_sanitize_referral_rate( $rate ) {
+	return preg_replace( '/[^0-9\.]/', '', $rate );
+}

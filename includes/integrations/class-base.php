@@ -428,13 +428,17 @@ abstract class Affiliate_WP_Base {
 		 *
 		 * @since 2.2
 		 *
-		 * @param float   $rate         Category-level referral rate.
+		 * @param float  $rate         Category-level referral rate.
 		 * @param int    $category_id  Category ID.
-		 * @param array  $args         Arguments for retrieving the product rate.
-		 * @param int    $affiliate_id  Affiliate ID.
+		 * @param array  $args         Arguments for retrieving the category rate.
+		 * @param int    $affiliate_id Affiliate ID.
 		 * @param string $context      Order context.
 		 */
-		return apply_filters( 'affwp_get_product_rate', $rate, $category_id, $args, $affiliate_id, $this->context );
+		$rate = apply_filters( 'affwp_get_category_rate', $rate, $category_id, $args, $affiliate_id, $this->context );
+
+		$rate = affwp_sanitize_referral_rate( $rate );
+
+		return $rate;
 	}
 
 	/**
@@ -466,7 +470,11 @@ abstract class Affiliate_WP_Base {
 		 * @param int    $affiliate_id Affiliate ID.
 		 * @param string $context      Order context.
 		 */
-		return apply_filters( 'affwp_get_product_rate', $rate, $product_id, $args, $affiliate_id, $this->context );
+		$rate = apply_filters( 'affwp_get_product_rate', $rate, $product_id, $args, $affiliate_id, $this->context );
+
+		$rate = affwp_sanitize_referral_rate( $rate );
+
+		return $rate;
 	}
 
 	/**

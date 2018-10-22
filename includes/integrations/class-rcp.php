@@ -70,7 +70,7 @@ class Affiliate_WP_RCP extends Affiliate_WP_Base {
 
 			}
 
-			$price = rcp_get_registration()->get_total( true, false );
+			$price = rcp_get_registration()->get_total( true, true );
 
 		} else {
 
@@ -159,7 +159,11 @@ class Affiliate_WP_RCP extends Affiliate_WP_Base {
 
 		}
 
-		return apply_filters( 'affwp_get_product_rate', $rate, $level_id, $args, $this->affiliate_id, $this->context );
+		$rate = apply_filters( 'affwp_get_product_rate', $rate, $level_id, $args, $this->affiliate_id, $this->context );
+
+		$rate = affwp_sanitize_referral_rate( $rate );
+
+		return $rate;
 
 	}
 
