@@ -179,6 +179,6 @@ class Affiliate_WP_WPForms extends Affiliate_WP_Base {
 
 }
 
-if ( class_exists( 'WPForms' ) ) {
+if ( function_exists( 'wpforms' ) ) {
 	new Affiliate_WP_WPForms;
 }
